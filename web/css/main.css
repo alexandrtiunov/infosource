@@ -1,0 +1,17 @@
+ul {
+    list-style: none;
+    /*padding: 0px;*/
+}
+
+ul li:before
+{
+    content: '\00BB';
+    margin: 0 1em;    /* any design */
+}
+
+.get-captcha{
+    display: none;
+}
+.send-captcha{
+    display: block;
+}
