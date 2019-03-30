@@ -1,27 +1,49 @@
 $(document).ready(function(){
 
+    send();
 
     $('a').click(function(e){
         e.preventDefault();
     });
 
-    $('.send-captcha').click(function(e){
-        e.preventDefault();
+    function send(){
+        $('.send-captcha.btn').click(function(e){
+            e.preventDefault();
 
-        var form = $('.send-captcha');
-        var data = form.serialize();
+            var form = $('form');
+            var data = form.serialize();
 
-        $.ajax({
-            url: form.attr('action'),
-            method: 'POST',
-            data: data,
-            success: function (response) {
-                $('.captcha-img').css('display', 'none');
-                $('.captcha-input').css('display', 'none');
-                $('.get-captcha').css('display', 'block');
-            }
+            var inputCode = $('.captcha-input').val();
+
+            $.ajax({
+                url: form.attr('action'),
+                method: 'POST',
+                data: data,
+                success: function (response) {
+                    console.log(response);
+                    if(response['captcha'] === inputCode){
+                        $('.captcha-img').css('display', 'none');
+                        $('.captcha-input').css('display', 'none');
+                        $('.get-captcha').css('display', 'block');
+                    }else{
+                        $('.error').css('display', 'block');
+                    }
+                }
+            });
         });
+    }
+
+    $('.captcha-input').select(function(){
+        $('.error').css('display', 'none');
+        send();
     });
+    $(document).keydown(function(e) {
+        if(e.which == 8) {
+            $('.error').css('display', 'none');
+            send();
+        }
+    });
+
 
     $('.dismiss').click(function(e){
 

@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\Request;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
@@ -56,6 +57,7 @@ class SiteController extends Controller
 
     /**
      * Displays homepage.
+     * Output on page tree from 100 to 1000 elements
      *
      * @return string
      */
@@ -77,14 +79,22 @@ class SiteController extends Controller
 
     public function actionWrite(){
 
-//        var_dump($_POST['norobot'], $_SESSION);
-
         if ($_POST['norobot'] == $_SESSION['randomnr2'])	{
-            // here you  place code to be executed if the captcha test passes
-            echo "Hey great , it appears you are not a robot";
+            $returnData = ['captcha' => $_POST['norobot']];
+
+            $response = Yii::$app->response;
+            $response->format = \yii\web\Response::FORMAT_JSON;
+            $response->data = $returnData;
+
+            return $response;
         }	else {
-            // here you  place code to be executed if the captcha test fails
-            echo "You're a very naughty robot!";
+            $returnData = ['error' => 'Вы не верно ввели проверочный код'];
+
+            $response = Yii::$app->response;
+            $response->format = \yii\web\Response::FORMAT_JSON;
+            $response->data = $returnData;
+
+            return $response;
         }
     }
 

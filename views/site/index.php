@@ -2,8 +2,9 @@
 
 /* @var $this yii\web\View */
 use yii\widgets\ActiveForm;
+use yii\helpers\Html;
 
-$this->title = 'Тестовое задание';
+$this->title = 'My Yii Application';
 ?>
 <div class="main">
 
@@ -46,10 +47,12 @@ $this->title = 'Тестовое задание';
                 <?php $form = ActiveForm::begin(['action' => ['site/write'], 'options' => ['method' => 'post'], 'class' => ['send-captcha']]) ?>
                     <input class="captcha-input" type="text" name="norobot"/>
                     <img class="captcha-img" src="captcha.php"/>
+                    <span class="error">Вы не верно ввели проверочный код</span>
                     <?= '<img class="get-captcha" src="' . $picture . '"' ?> alt="">
                 <div class="modal-footer">
                     <button type="button" class="dismiss btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="send-captcha btn btn-primary">Отправить</button>
+<!--                    --><?//= Html::submitButton('Отправить', ['class' => 'send-captcha btn btn-primary']) ?>
+                    <button type="button" class="send-captcha btn btn-primary">Отправить</button>
                 </div>
                 <?php $form = ActiveForm::end() ?>
             </div>

@@ -15,3 +15,6 @@ ul li:before
 .send-captcha{
     display: block;
 }
+.error{
+    display: none;
+}
