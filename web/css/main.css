@@ -17,4 +17,9 @@ ul li:before
 }
 .error{
     display: none;
+    color: red;
+}
+
+.captcha-input{
+    border-color: inherit;
 }

@@ -26,7 +26,11 @@ $(document).ready(function(){
                         $('.captcha-input').css('display', 'none');
                         $('.get-captcha').css('display', 'block');
                     }else{
-                        $('.error').css('display', 'block');
+                        $('.error').css({
+                            'display' : 'block',
+                            'color' : 'red'
+                        });
+                        $('.captcha-input').css('border-color', 'red');
                     }
                 }
             });
